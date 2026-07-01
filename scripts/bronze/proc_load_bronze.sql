@@ -27,7 +27,6 @@ BEGIN
 		PRINT 'Loading Bronze Layer';
 		PRINT '=================================================================';
 
-
 		PRINT '------------------------------------------------------------------';
 		PRINT 'Loading CRM Tables';
 		PRINT '------------------------------------------------------------------';
@@ -36,7 +35,12 @@ BEGIN
 		PRINT '>> Truncating Table: bronze.crm_cust_info'
 		TRUNCATE TABLE bronze.crm_cust_info;
 
+
 		PRINT '>> Inserting Data into: bronze.crm_cust_info'
+
+
+
+
 		BULK INSERT bronze.crm_cust_info
 		FROM 'C:\customer_data\sql-data-warehouse-project\sql-data-warehouse-project\datasets\source_crm\cust_info.csv'
 		WITH(
@@ -47,6 +51,9 @@ BEGIN
 		SET @end_time=GETDATE();
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second,@start_time,@end_time) AS NVARCHAR) + ' second ';
 		PRINT '>> -----------'
+
+
+
 
 
 		SET @start_time=GETDATE();
@@ -66,6 +73,8 @@ BEGIN
 		PRINT '>> -----------'
 
 
+
+
 		SET @start_time=GETDATE();
 		PRINT '>> Truncating Table: bronze.crm_sales_details'
 		TRUNCATE TABLE bronze.crm_sales_details;
@@ -81,12 +90,12 @@ BEGIN
 		SET @end_time=GETDATE();
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second,@start_time,@end_time) AS NVARCHAR) + ' second ';
 		PRINT '>> -----------'
-
-
+		
 
 		PRINT '------------------------------------------------------------------';
 		PRINT 'Loading ERP Tables';
 		PRINT '------------------------------------------------------------------';
+		
 
 
 		SET @start_time=GETDATE();
@@ -103,6 +112,7 @@ BEGIN
 		SET @end_time=GETDATE();
 		PRINT '>> Load Duration: ' + CAST(DATEDIFF(second,@start_time,@end_time) AS NVARCHAR) + ' second ';
 		PRINT '>> -----------'
+
 
 
 		SET @start_time=GETDATE();
@@ -138,6 +148,7 @@ BEGIN
 		PRINT '>> -----------'
 
 
+
 		SET @batch_end_time=GETDATE();
 		PRINT '==============================='
 		PRINT 'Loading Bronze Layer is Completed';
@@ -155,3 +166,4 @@ BEGIN
 		PRINT '=======================================================================';
 	END CATCH
 END
+
